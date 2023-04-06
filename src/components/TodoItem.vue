@@ -1,41 +1,66 @@
 <template>
-  <li>
-    <div v-bind:class="{ done: task.completed }" @click="$emit('completeTask', task.id)">
-      <input type="checkbox" :checked="task.completed" />
-      <span>{{ indexTask + 1 }}</span>
-      <span class="first-upper">{{ task.title }}</span>
-      <span>{{ task.completed }}</span>
-    </div>
-
-    <div>
-      <button :title="tipEdit" @click="$emit('editItem', task)"><IconEdit /></button>
-      <button :title="tipDelete" @click="$emit('removeTask', task.id)"><IconDelete /></button>
-    </div>
-  </li>
+  <q-item clickable v-ripple>
+    <q-item-section
+      class="task"
+      v-bind:class="{ done: task.completed }"
+      @click="$emit('completeTask', task.id)"
+    >
+      <!-- <input type="checkbox" :checked="task.completed" /> -->
+      <q-checkbox v-model="isCompleted" color="green" />
+      <span>{{ indexTask + 1 }}</span
+      ><span class="first-upper">{{ task.title }}</span>
+    </q-item-section>
+    <q-item-section avatar>
+      <q-btn-dropdown color="primary" padding="xs">
+        <q-list>
+          <q-item clickable v-close-popup @click="$emit('editItem', task)">
+            <q-item-section>
+              <q-item-label>Edit</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup @click="$emit('removeTask', task.id)">
+            <q-item-section>
+              <q-item-label>Delete</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+      <!-- <q-icon color="primary" name="bluetooth" /> -->
+    </q-item-section>
+  </q-item>
+  <q-separator />
 </template>
 
 <script>
-import IconDelete from '/vue.js/vitevue/src/components/Icons/IconDelete.vue'
-import IconEdit from '/vue.js/vitevue/src/components/Icons/IconEdit.vue'
+import IconDelete from "@/components/Icons/IconDelete.vue";
+import IconEdit from "@/components/Icons/IconEdit.vue";
 export default {
   data() {
     return {
-      tipEdit: 'Edit Task',
-      tipDelete: 'Delete Task'
-    }
+      tipEdit: "Edit Task",
+      tipDelete: "Delete Task",
+    };
+  },
+  computed: {
+    isCompleted: {
+      get() {
+        return this.task.completed;
+      },
+    },
   },
 
   props: {
     task: {},
 
     show: Boolean,
-    indexTask: Number
+    indexTask: Number,
   },
   components: {
     IconDelete,
-    IconEdit
-  }
-}
+    IconEdit,
+  },
+  emits: ["completeTask", "editItem", "removeTask"],
+};
 </script>
 
 <style scoped>
@@ -50,18 +75,9 @@ li {
 .done {
   text-decoration: line-through;
 }
-.remove {
-  background-color: brown;
-}
-button.pop-up::before {
-  content: attr(data-title);
-  display: none;
-}
-button.pop-up:focus::before {
-  display: block;
-}
-span::first-upper {
-  text-transform: uppercase;
-  display: inline-block;
+
+.task {
+  display: inline;
+  width: 280px;
 }
 </style>
