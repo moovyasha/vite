@@ -28,8 +28,9 @@
         ADD TASK
       </q-tooltip>
     </q-btn>
+
     <div
-      v-if="allTasks.length"
+      v-if="allTasks && allTasks.length"
       class="q-pa-md test_middle"
       style="max-width: 400px"
     >
@@ -44,6 +45,7 @@
         />
       </q-list>
     </div>
+
     <h2 v-else>NO TASKS!</h2>
 
     <!-- <Loader v-if="loading" /> -->
@@ -57,8 +59,6 @@ import TodoItem from "@/components/TodoItem.vue";
 export default {
   data() {
     return {
-      // taskList: [],
-      loading: true, //для отображения Loader'a
       filter: "all",
       show: false,
       editedItem: undefined,

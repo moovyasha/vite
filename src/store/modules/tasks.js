@@ -1,4 +1,4 @@
-import taskApi from '/vue.js/vitevue/src/api/tasksFromSite.js'
+import taskApi from '@/api/tasksFromSite.js'
 
 export default {
   namespaced: true,
