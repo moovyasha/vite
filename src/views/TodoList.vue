@@ -28,7 +28,11 @@
         ADD TASK
       </q-tooltip>
     </q-btn>
-    <div class="q-pa-md test_middle" style="max-width: 400px">
+    <div
+      v-if="allTasks.length"
+      class="q-pa-md test_middle"
+      style="max-width: 400px"
+    >
       <q-list bordered>
         <TodoItem
           v-for="(task, i) of allTasks"
@@ -40,6 +44,8 @@
         />
       </q-list>
     </div>
+    <h2 v-else>NO TASKS!</h2>
+
     <!-- <Loader v-if="loading" /> -->
   </div>
 </template>
@@ -157,9 +163,5 @@ h2 {
 .test_middle {
   width: 400px;
   margin: auto;
-}
-.test_middle_action {
-  width: 40px;
-  height: 40px;
 }
 </style>
