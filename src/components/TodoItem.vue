@@ -25,7 +25,6 @@
           </q-item>
         </q-list>
       </q-btn-dropdown>
-      <!-- <q-icon color="primary" name="bluetooth" /> -->
     </q-item-section>
   </q-item>
   <q-separator />
@@ -36,21 +35,24 @@ import IconDelete from "@/components/Icons/IconDelete.vue";
 import IconEdit from "@/components/Icons/IconEdit.vue";
 export default {
   data() {
-    return {
-      tipEdit: "Edit Task",
-      tipDelete: "Delete Task",
-    };
+    return {};
   },
   computed: {
     isCompleted: {
       get() {
+        console.log('set', this.task)
         return this.task.completed;
+        
+      },
+      set( ) {
+        this.$emit("completeTask", this.task.id);
+        console.log('get', this.task)
       },
     },
   },
 
   props: {
-    task: {},
+    task: { Object },
 
     show: Boolean,
     indexTask: Number,
@@ -64,20 +66,14 @@ export default {
 </script>
 
 <style scoped>
-li {
-  border: 4px solid rgb(121, 55, 121);
-  /* display: block; */
-  justify-content: space-between;
-  padding: 12px 43px;
-  margin-bottom: 5px;
-  width: auto;
-}
 .done {
   text-decoration: line-through;
 }
 
 .task {
-  display: inline;
-  width: 280px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 </style>

@@ -2,12 +2,14 @@
   <div>
     <div>{{ getTasks }}</div>
     <h2>Todo</h2>
+    <!-- <div>
+      <select v-model="filter">
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="not-completed">Not completed</option>
+      </select>
+    </div> -->
 
-    <!-- <select v-model="filter">
-      <option value="all">All</option>
-      <option value="completed">Completed</option>
-      <option value="not-completed">Not completed</option>
-    </select> -->
     <VisibleForm
       :show="show"
       :editedItem="editedItem"
@@ -128,14 +130,14 @@ export default {
   },
   computed: {
     // filterTask() {
-    //   if (this.filter === 'all') {
-    //     return this.taskList
+    //   if (this.filter === "all") {
+    //     return this.allTasks;
     //   }
-    //   if (this.filter === 'completed') {
-    //     return this.taskList.filter((t) => t.completed)
+    //   if (this.filter === "completed") {
+    //     return this.allTasks.filter((t) => t.completed);
     //   }
-    //   if (this.filter === 'not-completed') {
-    //     return this.taskList.filter((t) => !t.completed)
+    //   if (this.filter === "not-completed") {
+    //     return this.allTasks.filter((t) => !t.completed);
     //   }
     // },
 
